@@ -101,7 +101,7 @@
     </div>
 
     <!-- background music: put the file 'terbuang-dalam-waktu.mp3' in the project folder -->
-    <audio id="bgMusic" loop preload="auto">
+    <audio id="bgMusic" loop preload="auto" playsinline autoplay>
       <source src="terbuang-dalam-waktu.mp3" type="audio/mpeg" />
     </audio>
 
@@ -109,10 +109,27 @@
     <script src="script.js"></script>
     <script>
       // auto-reveal when this page loads
-      window.addEventListener("load", () => {
+      window.addEventListener("load", async () => {
         const btn = document.getElementById("showButton");
-        // if revealMessage exists, call it
         if (typeof revealMessage === "function") revealMessage();
+
+        const audio = document.getElementById("bgMusic");
+        const toggle = document.getElementById("musicToggleWish");
+        const hint = document.getElementById("musicHint");
+        if (audio) {
+          try {
+            await audio.play();
+            if (toggle) toggle.textContent = "⏸️ Hentikan Musik";
+            if (hint)
+              hint.textContent =
+                "Lagu otomatis mulai saat halaman ini terbuka.";
+          } catch (e) {
+            if (toggle) toggle.textContent = "▶️ Putar Musik";
+            if (hint)
+              hint.textContent =
+                "Jika lagu tidak otomatis mulai, ketuk tombol musik di bawah.";
+          }
+        }
       });
 
       document.getElementById("backBtn").addEventListener("click", () => {
@@ -123,9 +140,9 @@
       (function () {
         const toggle = document.getElementById("musicToggleWish");
         const audio = document.getElementById("bgMusic");
+        const hint = document.getElementById("musicHint");
         let audioAvailable = false;
         if (audio) {
-          // check if source file resolves by attempting to load
           audio.addEventListener("canplaythrough", () => {
             audioAvailable = true;
           });
@@ -142,16 +159,15 @@
           masterGain.gain.value = 0.12;
           masterGain.connect(audioCtx.destination);
 
-          // create a gentle pad using two detuned oscillators
           osc1 = audioCtx.createOscillator();
           osc1.type = "sine";
-          osc1.frequency.value = 220; // A3-ish
+          osc1.frequency.value = 220;
           const g1 = audioCtx.createGain();
           g1.gain.value = 0.6;
 
           osc2 = audioCtx.createOscillator();
           osc2.type = "sine";
-          osc2.frequency.value = 330; // E4
+          osc2.frequency.value = 330;
           const g2 = audioCtx.createGain();
           g2.gain.value = 0.5;
 
@@ -171,6 +187,10 @@
           osc1.start();
           osc2.start();
           lfo.start();
+
+          if (hint)
+            hint.textContent =
+              "Musik synthesizer dimainkan karena audio asli belum tersedia.";
         }
 
         function stopSynth() {
@@ -188,21 +208,28 @@
               try {
                 await audio.play();
                 toggle.textContent = "⏸️ Hentikan Musik";
+                if (hint)
+                  hint.textContent =
+                    "Lagu sedang diputar. Ketuk lagi untuk berhenti.";
               } catch (e) {
                 toggle.textContent = "▶️ Putar Musik";
+                if (hint)
+                  hint.textContent =
+                    "Autoplay diblokir, jadi ketuk tombol untuk memulai.";
               }
             } else {
               audio.pause();
               toggle.textContent = "▶️ Putar Musik";
+              if (hint) hint.textContent = "Musik dihentikan.";
             }
           } else {
-            // use synthesizer fallback
             if (!audioCtx) {
               startSynth();
               toggle.textContent = "⏸️ Hentikan Musik";
             } else {
               stopSynth();
               toggle.textContent = "▶️ Putar Musik";
+              if (hint) hint.textContent = "Musik sintetis dihentikan.";
             }
           }
         });

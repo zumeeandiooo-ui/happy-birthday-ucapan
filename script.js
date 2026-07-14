@@ -103,6 +103,7 @@ if (button) {
     });
   } else {
     button.addEventListener("click", () => {
+      sessionStorage.setItem("wishAutoPlay", "1");
       window.location.href = "wish.html";
     });
   }

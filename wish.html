@@ -116,15 +116,23 @@
         const audio = document.getElementById("bgMusic");
         const toggle = document.getElementById("musicToggleWish");
         const hint = document.getElementById("musicHint");
+        const canAutoPlay = sessionStorage.getItem("wishAutoPlay") === "1";
+
         if (audio) {
-          try {
-            await audio.play();
-            if (toggle) toggle.textContent = "⏸️ Hentikan Musik";
-            if (hint)
-              hint.textContent =
-                "Lagu otomatis mulai saat halaman ini terbuka.";
-          } catch (e) {
-            if (toggle) toggle.textContent = "▶️ Putar Musik";
+          if (canAutoPlay) {
+            try {
+              await audio.play();
+              if (toggle) toggle.textContent = "⏸️ Hentikan Musik";
+              if (hint)
+                hint.textContent =
+                  "Lagu otomatis mulai saat halaman ini terbuka.";
+            } catch (e) {
+              if (toggle) toggle.textContent = "▶️ Putar Musik";
+              if (hint)
+                hint.textContent =
+                  "Autoplay diblokir, ketuk tombol musik untuk memulai.";
+            }
+          } else {
             if (hint)
               hint.textContent =
                 "Jika lagu tidak otomatis mulai, ketuk tombol musik di bawah.";

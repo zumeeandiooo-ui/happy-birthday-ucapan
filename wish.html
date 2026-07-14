@@ -97,6 +97,16 @@
             ▶️ Putar Musik
           </button>
         </div>
+        <div
+          id="musicHint"
+          style="
+            font-size: 0.95rem;
+            color: #555;
+            max-width: 760px;
+            margin: 0 auto 24px;
+            line-height: 1.5;
+          "
+        ></div>
       </div>
     </div>
 
@@ -116,26 +126,19 @@
         const audio = document.getElementById("bgMusic");
         const toggle = document.getElementById("musicToggleWish");
         const hint = document.getElementById("musicHint");
-        const canAutoPlay = sessionStorage.getItem("wishAutoPlay") === "1";
 
         if (audio) {
-          if (canAutoPlay) {
-            try {
-              await audio.play();
-              if (toggle) toggle.textContent = "⏸️ Hentikan Musik";
-              if (hint)
-                hint.textContent =
-                  "Lagu otomatis mulai saat halaman ini terbuka.";
-            } catch (e) {
-              if (toggle) toggle.textContent = "▶️ Putar Musik";
-              if (hint)
-                hint.textContent =
-                  "Autoplay diblokir, ketuk tombol musik untuk memulai.";
-            }
-          } else {
+          try {
+            await audio.play();
+            if (toggle) toggle.textContent = "⏸️ Hentikan Musik";
             if (hint)
               hint.textContent =
-                "Jika lagu tidak otomatis mulai, ketuk tombol musik di bawah.";
+                "Lagu otomatis mulai saat halaman ini terbuka.";
+          } catch (e) {
+            if (toggle) toggle.textContent = "▶️ Putar Musik";
+            if (hint)
+              hint.textContent =
+                "Autoplay diblokir, ketuk tombol musik untuk memulai.";
           }
         }
       });

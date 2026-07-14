@@ -365,3 +365,49 @@ button:hover {
     font-size: 2.5rem;
   }
 }
+
+/* Wish page gallery */
+.wish-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  max-width: 900px;
+  margin: 18px auto 22px;
+  align-items: stretch;
+}
+.wish-gallery .gallery-item {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(89, 36, 66, 0.06);
+  text-align: center;
+}
+.wish-gallery img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+.wish-gallery figcaption {
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  color: #6a3f56;
+}
+
+@media (max-width: 780px) {
+  .wish-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .wish-gallery img {
+    height: 180px;
+  }
+}
+
+@media (max-width: 440px) {
+  .wish-gallery {
+    grid-template-columns: 1fr;
+  }
+  .wish-gallery img {
+    height: 220px;
+  }
+}

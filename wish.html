@@ -22,8 +22,43 @@
         >
           Hari ini semua doa untukmu dikirim dengan pelukan hangat dan cinta tak
           berujung. Semoga semua cita-citamu terus tumbuh dan senyummu selalu
-          bersinar.
+          bersinar. Today is all about celebrating the most beautiful person in
+          my life—you. Thank you for bringing so much happiness, warmth, and
+          love into my world. Every moment with you has become one of my
+          favorite memories, and every day I spend with you reminds me how lucky
+          I am to have you. I hope this new chapter of your life brings you
+          endless joy, good health, beautiful opportunities, and all the dreams
+          you've been wishing for. No matter where life takes us, I promise to
+          keep choosing you, supporting you, and loving you with all my heart.
+          You are my peace, my happiness, and the best part of my life. Happy
+          Birthday once again, my beautiful girl. I love you today, tomorrow,
+          and for all the days to come. ❤️✨ Today is all about celebrating the
+          most beautiful person in my life—you. Thank you for bringing so much
+          happiness, warmth, and love into my world. Every moment with you has
+          become one of my favorite memories, and every day I spend with you
+          reminds me how lucky I am to have you. I hope this new chapter of your
+          life brings you endless joy, good health, beautiful opportunities, and
+          all the dreams you've been wishing for. No matter where life takes us,
+          I promise to keep choosing you, supporting you, and loving you with
+          all my heart. You are my peace, my happiness, and the best part of my
+          life. Happy Birthday once again, my beautiful girl. I love you today,
+          tomorrow, and for all the days to come. ❤️✨
         </p>
+        <!-- Photo gallery: three selected photos -->
+        <div class="wish-gallery" aria-label="Foto-foto kenangan">
+          <figure class="gallery-item">
+            <img src="photo1.jpeg" alt="Nursarah dan aku 1" />
+            <figcaption>Kenangan manis</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="photo2.jpeg" alt="Nursarah dan aku 2" />
+            <figcaption>Malam indah</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="photo3.jpeg" alt="Nursarah dan aku 3" />
+            <figcaption>Selalu bersama</figcaption>
+          </figure>
+        </div>
         <div style="margin: 18px 0 30px">
           <button
             id="backBtn"
@@ -35,6 +70,19 @@
             "
           >
             ⟵ Kembali
+          </button>
+          <button
+            id="musicToggleWish"
+            style="
+              padding: 12px 18px;
+              margin-left: 12px;
+              border-radius: 12px;
+              border: none;
+              background: linear-gradient(135deg, #ff77b8, #ffb0d9);
+              color: #fff;
+            "
+          >
+            ▶️ Putar Musik
           </button>
         </div>
       </div>
@@ -58,6 +106,95 @@
       document.getElementById("backBtn").addEventListener("click", () => {
         window.location.href = "index.html";
       });
+
+      // Music toggle with fallback synthesizer
+      (function () {
+        const toggle = document.getElementById("musicToggleWish");
+        const audio = document.getElementById("bgMusic");
+        let audioAvailable = false;
+        if (audio) {
+          // check if source file resolves by attempting to load
+          audio.addEventListener("canplaythrough", () => {
+            audioAvailable = true;
+          });
+          audio.addEventListener("error", () => {
+            audioAvailable = false;
+          });
+        }
+
+        // simple WebAudio synthesizer fallback
+        let audioCtx, osc1, osc2, masterGain;
+        function startSynth() {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          masterGain = audioCtx.createGain();
+          masterGain.gain.value = 0.12;
+          masterGain.connect(audioCtx.destination);
+
+          // create a gentle pad using two detuned oscillators
+          osc1 = audioCtx.createOscillator();
+          osc1.type = "sine";
+          osc1.frequency.value = 220; // A3-ish
+          const g1 = audioCtx.createGain();
+          g1.gain.value = 0.6;
+
+          osc2 = audioCtx.createOscillator();
+          osc2.type = "sine";
+          osc2.frequency.value = 330; // E4
+          const g2 = audioCtx.createGain();
+          g2.gain.value = 0.5;
+
+          const lfo = audioCtx.createOscillator();
+          lfo.type = "sine";
+          lfo.frequency.value = 0.15;
+          const lfoGain = audioCtx.createGain();
+          lfoGain.gain.value = 20;
+          lfo.connect(lfoGain);
+          lfoGain.connect(osc1.frequency);
+
+          osc1.connect(g1);
+          g1.connect(masterGain);
+          osc2.connect(g2);
+          g2.connect(masterGain);
+
+          osc1.start();
+          osc2.start();
+          lfo.start();
+        }
+
+        function stopSynth() {
+          try {
+            osc1.stop();
+            osc2.stop();
+            audioCtx.close();
+          } catch (e) {}
+          audioCtx = null;
+        }
+
+        toggle.addEventListener("click", async () => {
+          if (audioAvailable) {
+            if (audio.paused) {
+              try {
+                await audio.play();
+                toggle.textContent = "⏸️ Hentikan Musik";
+              } catch (e) {
+                toggle.textContent = "▶️ Putar Musik";
+              }
+            } else {
+              audio.pause();
+              toggle.textContent = "▶️ Putar Musik";
+            }
+          } else {
+            // use synthesizer fallback
+            if (!audioCtx) {
+              startSynth();
+              toggle.textContent = "⏸️ Hentikan Musik";
+            } else {
+              stopSynth();
+              toggle.textContent = "▶️ Putar Musik";
+            }
+          }
+        });
+      })();
     </script>
   </body>
 </html>

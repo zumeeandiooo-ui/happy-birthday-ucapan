@@ -20,6 +20,12 @@ Halaman web statis ini adalah ucapan ulang tahun sederhana yang bisa kamu kirim 
    git push -u origin main
    ```
 
+## Musik
+
+Jika kamu ingin lagu "Terbuang Dalam Waktu" (instrumen Barasuara) diputar, letakkan file MP3-nya di folder proyek dan beri nama `terbuang-dalam-waktu.mp3`.
+
+Perhatian: saya tidak menyediakan file lagu berhak cipta. Jika kamu punya file MP3, taruh di folder proyek; jika tidak, kamu bisa menggunakan lagu instrumental bebas royalti dan beri nama file seperti di atas.
+
 ## Kustomisasi
 
 - Ganti teks pada `index.html` agar sesuai nama dan pesan pasanganmu.

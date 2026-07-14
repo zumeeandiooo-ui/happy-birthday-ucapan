@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ucapan untuk Nursarah</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <div class="card" style="padding: 56px; text-align: center">
+        <h1 style="font-size: 3.6rem; margin: 0 0 18px">
+          Selamat Ulang Tahun, Nursarah!
+        </h1>
+        <p
+          style="
+            font-size: 1.1rem;
+            color: var(--text);
+            max-width: 800px;
+            margin: 0 auto 24px;
+          "
+        >
+          Hari ini semua doa untukmu dikirim dengan pelukan hangat dan cinta tak
+          berujung. Semoga semua cita-citamu terus tumbuh dan senyummu selalu
+          bersinar.
+        </p>
+        <div style="margin: 18px 0 30px">
+          <button
+            id="backBtn"
+            style="
+              padding: 12px 20px;
+              border-radius: 12px;
+              border: none;
+              background: transparent;
+            "
+          >
+            ⟵ Kembali
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- background music: put the file 'terbuang-dalam-waktu.mp3' in the project folder -->
+    <audio id="bgMusic" loop preload="auto">
+      <source src="terbuang-dalam-waktu.mp3" type="audio/mpeg" />
+    </audio>
+
+    <canvas id="confettiCanvas"></canvas>
+    <script src="script.js"></script>
+    <script>
+      // auto-reveal when this page loads
+      window.addEventListener("load", () => {
+        const btn = document.getElementById("showButton");
+        // if revealMessage exists, call it
+        if (typeof revealMessage === "function") revealMessage();
+      });
+
+      document.getElementById("backBtn").addEventListener("click", () => {
+        window.location.href = "index.html";
+      });
+    </script>
+  </body>
+</html>

@@ -1,24 +1,76 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Selamat Ulang Tahun</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="page">
-    <div class="card">
-      <div class="sparkles"></div>
-      <div class="message">
-        <p class="greeting">Selamat Ulang Tahun, Sayang!</p>
-        <h1>Semoga hari ini penuh cinta, tawa, dan kejutan manis.</h1>
-        <p>Kamu istimewa, aku selalu di sini untukmu.</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday Nursarah</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <div class="hero-banner">
+        <div class="hero-text">
+          <span>Untuk Nursarah Azzami</span>
+          <h1 class="hero-anim">Selamat Ulang Tahun, Cantikku</h1>
+          <p>
+            Semoga hari ini terasa manis seperti senyummu, hangat seperti
+            pelukan kita, dan penuh kejutan indah.
+          </p>
+          <div class="hero-decor">
+            <div class="gold-ribbon" aria-hidden="true">🎀</div>
+          </div>
+        </div>
       </div>
-      <button id="showButton">Buka Ucapan</button>
+
+      <div class="card">
+        <div class="sparkles"></div>
+        <div class="card-top">
+          <div class="photo-frame">
+            <img
+              id="heroImage"
+              src="photo.jpg"
+              alt="Foto Nursarah Azzami"
+              onerror="
+                this.style.display = 'none';
+                document.querySelector('.photo-fallback').style.display =
+                  'grid';
+              "
+            />
+            <div class="photo-fallback">
+              <span></span>
+            </div>
+              <div class="gold-ring" aria-hidden="true"></div>
+            </div>
+          
+          </div>
+          <div class="message">
+            <p class="greeting">Selamat Ulang Tahun, Sayang!</p>
+            <h2>Hari spesialmu sudah tiba.</h2>
+            <p>
+              Kamu membuat setiap hari jadi lebih berarti, dan aku bersyukur
+              bisa merayakan dirimu hari ini.
+            </p>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <p>
+            Terima kasih sudah jadi partner terbaik, teman paling setia, dan
+            alasan tawa di setiap hariku.
+          </p>
+          <p>
+            Mari kita rayakan ulang tahunmu dengan banyak cinta, kejutan, dan
+            kenangan yang tak terlupakan.
+          </p>
+          <div class="controls">
+            <button id="showButton">Buka Ucapan Spesial</button>
+            <button id="musicToggle" aria-pressed="false">▶️ Putar Musik</button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <canvas id="confettiCanvas"></canvas>
-  <script src="script.js"></script>
-</body>
+    
+    <canvas id="confettiCanvas"></canvas>
+    <script src="script.js"></script>
+  </body>
 </html>

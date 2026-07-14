@@ -216,6 +216,53 @@ body {
   cursor: pointer;
 }
 
+/* Hide the index music toggle (music is on wish.html) */
+#musicToggle {
+  display: none;
+}
+
+/* Cute blurb box */
+.blurb {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 245, 252, 0.9),
+    rgba(255, 233, 243, 0.95)
+  );
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 14px 40px rgba(255, 121, 180, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.blurb-emoji {
+  font-size: 2.2rem;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: radial-gradient(circle at 30% 30%, #fff, #ffd6eb 40%);
+  box-shadow: 0 8px 18px rgba(255, 127, 191, 0.12);
+}
+
+.blurb-text p {
+  margin: 0 0 10px;
+  color: #5b3b4f;
+}
+
+.controls button:first-child {
+  padding: 14px 24px;
+  font-weight: 800;
+  border-radius: 999px;
+}
+
+.controls button:first-child:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
 .heart {
   position: fixed;
   width: 18px;
